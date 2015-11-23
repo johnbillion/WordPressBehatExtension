@@ -79,6 +79,9 @@ class WordPressExtension implements ExtensionInterface
                         ->scalarNode('password')
                             ->defaultValue('')
                         ->end()
+                        ->scalarNode('host')
+                            ->defaultValue('localhost')
+                        ->end()
                     ->end()
                 ->end()
             ->end();

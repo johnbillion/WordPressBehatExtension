@@ -100,11 +100,13 @@ class WordPressContextInitializer implements ContextInitializer
                 str_replace(array(
                     "'DB_NAME', 'database_name_here'",
                     "'DB_USER', 'username_here'",
-                    "'DB_PASSWORD', 'password_here'"
+                    "'DB_PASSWORD', 'password_here'",
+                    "'DB_HOST', 'localhost'",
                 ), array(
                     sprintf("'DB_NAME', '%s'", $this->wordpressParams['connection']['db']),
                     sprintf("'DB_USER', '%s'", $this->wordpressParams['connection']['username']),
                     sprintf("'DB_PASSWORD', '%s'", $this->wordpressParams['connection']['password']),
+                    sprintf("'DB_HOST', '%s'", $this->wordpressParams['connection']['host']),
                 ), $file->getContents());
             $fs->dumpFile($file->getPath() . '/wp-config.php', $configContent);
         }
@@ -129,7 +131,7 @@ class WordPressContextInitializer implements ContextInitializer
         if ($this->wordpressParams['flush_database']) {
             $connection = $this->wordpressParams['connection'];
             $mysqli = new \Mysqli(
-                'localhost',
+                $connection['host'],
                 $connection['username'],
                 $connection['password'],
                 $connection['db']
