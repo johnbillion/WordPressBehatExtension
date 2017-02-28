@@ -22,6 +22,10 @@ class WordPressContext extends MinkContext
     {
         global $wp_rewrite;
 
+        if ( empty( $_SERVER['SERVER_NAME'] ) ) {
+            $_SERVER['SERVER_NAME'] = 'example.com';
+        }
+
         $name = "admin";
         $email = "an@example.com";
         $password = "test";
